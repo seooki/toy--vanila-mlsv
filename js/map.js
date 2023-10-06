@@ -15,35 +15,30 @@ export const map = (item) => {
     zoom: 8,
   });
 
-  var contentString = [
-    '<div class="iw_inner" style="padding: 10px;">',
-    "   <h3>서울특별시청</h3>",
-    "   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />",
-    "       <br />",
-    "       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />",
-    '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
-    "   </p>",
-    "</div>",
-  ].join("");
+  var contentString;
 
-  var infowindow = new naver.maps.InfoWindow({
-    content: contentString,
-  });
+  const setContentString = (obj) => {
+    contentString = "<div>hello</div>";
+  };
 
   item.map((items) => {
     var marker = new naver.maps.Marker({
-      position: new naver.maps.LatLng(items.x, items.y),
+      position: new naver.maps.LatLng(items.latitude, items.longitude),
       map: map,
     });
 
     naver.maps.Event.addListener(marker, "click", function (e) {
-      console.log(e);
-
+      setContentString();
+      console.log(contentString);
       if (infowindow.getMap()) {
         infowindow.close();
       } else {
         infowindow.open(map, marker);
       }
     });
+  });
+
+  var infowindow = new naver.maps.InfoWindow({
+    content: contentString,
   });
 };
