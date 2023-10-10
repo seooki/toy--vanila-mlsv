@@ -1,6 +1,5 @@
 export const map = (item) => {
   const { naver } = window;
-
   var mapOptions = {
     center: new naver.maps.LatLng(37.3595704, 127.105399),
     zoom: 7,
@@ -18,7 +17,7 @@ export const map = (item) => {
   var contentString;
 
   const setContentString = (obj) => {
-    contentString = "<div>hello</div>";
+    contentString = "test";
   };
 
   item.map((items) => {
@@ -29,6 +28,7 @@ export const map = (item) => {
 
     naver.maps.Event.addListener(marker, "click", function (e) {
       setContentString();
+      console.log(e);
       console.log(contentString);
       if (infowindow.getMap()) {
         infowindow.close();

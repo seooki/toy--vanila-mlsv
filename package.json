@@ -1,5 +1,8 @@
 {
-  "dependencies": {
-    "axios": "^1.5.1"
-  }
+  "name": "toy--vanila-mlsv",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/seooki/toy--vanila-mlsv.git",
+  "author": "seooki <navproyuhs@naver.com>",
+  "license": "MIT"
 }

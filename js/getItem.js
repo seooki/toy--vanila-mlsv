@@ -1,25 +1,29 @@
-import { key } from "../key.js";
+import { key } from "../assets/key.js";
 import { getNumOfRows } from "./getNumOfRows.js";
 
-export const getItem = async () => {
+async function getItem() {
   const totalCount = await getNumOfRows();
-  const geo = [];
-  const url = `http://api.data.go.kr/openapi/tn_pubr_public_free_mlsv_api?serviceKey=${key}&pageNo=1&numOfRows=${totalCount}&type=json`;
-  const response = await fetch(url);
-  const result = await response.json();
-  result.response.body.items.map((item) => {
-    geo.push({
-      latitude: item.latitude,
-      longitude: item.longitude,
-      fcltyNm: item.fcltyNm,
-      rdnmadr: item.rdnmadr,
-      phoneNumber: item.phoneNumber,
-      mlsvPlace: item.mlsvPlace,
-      mlsvTime: item.mlsvTime,
-      mlsvDate: item.mlsvDate,
-      mlsvTrget: item.mlsvTrget,
-    });
-  });
+  const item = [];
+  const url =
+    "http://api.data.go.kr/openapi/tn_pubr_public_free_mlsv_api"; /*URL*/
+  let queryParams =
+    "?" + encodeURIComponent("serviceKey") + "=" + key; /*Service Key*/
+  queryParams +=
+    "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1"); /**/
+  queryParams +=
+    "&" +
+    encodeURIComponent("numOfRows") +
+    "=" +
+    encodeURIComponent(totalCount); /**/
+  queryParams +=
+    "&" + encodeURIComponent("type") + "=" + encodeURIComponent("json"); /**/
 
-  return geo;
-};
+  const response = await fetch(url + queryParams);
+  const result = await response.json();
+  console.log(result);
+  item.push(result.response.body.items);
+
+  return item;
+}
+
+export default getItem;
