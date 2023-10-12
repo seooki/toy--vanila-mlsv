@@ -21,20 +21,22 @@ export const map = (item) => {
   };
 
   item.map((items) => {
-    var marker = new naver.maps.Marker({
-      position: new naver.maps.LatLng(items.latitude, items.longitude),
-      map: map,
-    });
+    items.map((items) => {
+      var marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(items.latitude, items.longitude),
+        map: map,
+      });
 
-    naver.maps.Event.addListener(marker, "click", function (e) {
-      setContentString();
-      console.log(e);
-      console.log(contentString);
-      if (infowindow.getMap()) {
-        infowindow.close();
-      } else {
-        infowindow.open(map, marker);
-      }
+      naver.maps.Event.addListener(marker, "click", function (e) {
+        setContentString();
+        console.log(e);
+        console.log(contentString);
+        if (infowindow.getMap()) {
+          infowindow.close();
+        } else {
+          infowindow.open(map, marker);
+        }
+      });
     });
   });
 

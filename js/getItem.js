@@ -20,9 +20,7 @@ async function getItem() {
 
   const response = await fetch(url + queryParams);
   const result = await response.json();
-  console.log(result);
   item.push(result.response.body.items);
-
   return item;
 }
 
